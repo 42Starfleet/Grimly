@@ -3,7 +3,7 @@ The 2nd project of Starfleet.
 
 Rules:
 1. All exported functions need to be placed in their own file name, with helper functions within them being declared as static. Ex. https://github.com/linhvoyo/bistromatic/tree/master/bistromatic/srcs
-2. For every function you create, write: what is being returned, what parameters are taken, and what the function does.
+2. For every function you create, comment: what is being returned, what parameters are taken, and what the function does.
 3. Include in your README what your program does and your implementation methods(algorithm, data structures, ect). 
 
 Directory Structure:
