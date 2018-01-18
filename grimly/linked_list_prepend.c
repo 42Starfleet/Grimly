@@ -6,7 +6,7 @@
 /*   By: lilam <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 07:59:11 by lilam             #+#    #+#             */
-/*   Updated: 2018/01/18 10:54:01 by hiroshius        ###   ########.fr       */
+/*   Updated: 2018/01/18 15:19:24 by hiroshius        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	prepend_link(t_linked_list **list, void *data)
 	t_linked_list *new;
 
 	old = (*list);
-	new = create_link(data);
+	new = data;
 	new->next = old;
 	*list = new;
 }

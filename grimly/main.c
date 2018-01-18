@@ -18,6 +18,8 @@ int main(int argc, char **argv)
 			if (valid_map(1, 1, g_tokens.lines))
 			{
 				printf("MAP IS VALID\n");
+				print_linked_list(g_tokens.entries);
+				print_linked_list(g_tokens.exits);
 //				solve_map(&g_map);
 //				print_map(g_map);
 			}

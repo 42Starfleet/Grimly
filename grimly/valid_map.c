@@ -43,18 +43,18 @@ static void		add_entries_and_exits_on_first_and_last_lines(void)
 	while (j < g_tokens.columns)
 	{
 		if (g_map[0][j] == g_tokens.entry)
-			prepend_link(&g_tokens.entries, create_link(int_pair(0, j)));
+			add_link(&g_tokens.entries, create_link(int_pair(0, j)));
 		if (g_map[0][j] == g_tokens.exit)
-			prepend_link(&g_tokens.exits, create_link(int_pair(0, j)));
+			add_link(&g_tokens.exits, create_link(int_pair(0, j)));
 		j++;
 	}
 	j = 0;
 	while (j < g_tokens.columns)
 	{
 		if (g_map[l][j] == g_tokens.entry)
-			prepend_link(&g_tokens.entries, create_link(int_pair(l, j)));
+			add_link(&g_tokens.entries, create_link(int_pair(l, j)));
 		if (g_map[l][j] == g_tokens.exit)
-			prepend_link(&g_tokens.exits, create_link(int_pair(l, j)));
+			add_link(&g_tokens.exits, create_link(int_pair(l, j)));
 		j++;
 	}
 }
@@ -72,13 +72,13 @@ static int		valid_entries_and_exits(void)
 	while (i < g_tokens.lines - 1)
 	{
 		if (g_map[i][0] == g_tokens.entry)
-			prepend_link(&g_tokens.entries, create_link(int_pair(i, 0)));
+			add_link(&g_tokens.entries, create_link(int_pair(i, 0)));
 		if (g_map[i][j] == g_tokens.entry)
-			prepend_link(&g_tokens.entries, create_link(int_pair(i, j)));
+			add_link(&g_tokens.entries, create_link(int_pair(i, j)));
 		if (g_map[i][0] == g_tokens.exit)
-			prepend_link(&g_tokens.exits, create_link(int_pair(i, 0)));
+			add_link(&g_tokens.exits, create_link(int_pair(i, 0)));
 		if (g_map[i][j] == g_tokens.exit)
-			prepend_link(&g_tokens.exits, create_link(int_pair(i, j)));
+			add_link(&g_tokens.exits, create_link(int_pair(i, j)));
 		i++;
 	}
 	if (linked_list_size(g_tokens.entries) != 1)
