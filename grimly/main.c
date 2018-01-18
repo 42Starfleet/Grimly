@@ -2,30 +2,27 @@
 
 int main(int argc, char **argv)
 {
-	int fd;
 	int i;
-	char *legend;
-	char **map;
-	char **tokens;
 
 	i = 1;
 	while (i < argc || argc == 1)
 	{
 		if (argc == 1)
-			fd = 0;
+			g_fd = 0;
 		else
-			fd = open(argv[i], O_RDONLY);
-		if (get_next_line(fd, &legend) > 0 && valid_legend(legend))
+			g_fd = open(argv[i], O_RDONLY);
+		if (get_next_line(g_fd, &g_legend) > 0 && valid_legend(g_legend))
 		{
-//			tokens = tokenize_legend(legend);
-//			initialize_map(fd, &map, tokens);
-//			if (valid_map(map, tokens))
-//			{
-//				solve_map(&map);
-//				print_map(map);
-//			}
-//			else
-//				ft_putstr("MAP ERROR\n");
+			tokenize_legend(g_legend);
+			initialize_map();
+			if (valid_map(0, 0))
+			{
+				printf("MAP IS VALID\n");
+//				solve_map(&g_map);
+//				print_map(g_map);
+			}
+			else
+				ft_putstr("MAP ERROR\n");
 		}
 		else
 			ft_putstr("MAP ERROR\n");
