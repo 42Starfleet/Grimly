@@ -94,7 +94,7 @@ int				valid_map(int i, int j, int lines)
 		return (0);
 	while (i < lines - 1)
 	{
-		if (i >= lines)
+		if ((j = 0) && i >= lines)
 			return (0);
 		if (!(g_map[i][0] == g_tokens.full || g_map[i][0] == g_tokens.entry ||
 				g_map[i][0] == g_tokens.exit))
