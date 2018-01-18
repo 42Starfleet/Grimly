@@ -1,12 +1,36 @@
 #include "grimly.h"
 
-char **tokenize_legend(char *legend)
+static void	tokenize_letters(char *letters)
 {
-	char **new;
-	char *iter;
+	g_tokens.empty = letters[0];
+	g_tokens.path = letters[1];
+	g_tokens.entry = letters[2];
+	g_tokens.exit = letters[3];
+}
 
+void		tokenize_legend(char *legend)
+{
+	char	*iter;
+	int		i;
+
+	i = 0;
+	while (legend[i] != 'x')
+		i++;
+	legend[i] = '\0';
+	g_tokens.lines = ft_atoi(legend);
 	iter = legend;
-	new = malloc(sizeof(char *) * 8);
-	new[8] = 0;
-	return (new);
+	while (*iter)
+		iter++;
+	iter++;
+	i++;
+	while ('0' <= legend[i] && legend[i] <= '9')
+		i++;
+	g_tokens.full = legend[i];
+	legend[i] = '\0';
+	g_tokens.columns = ft_atoi(iter);
+	while (*iter)
+		iter++;
+	iter++;
+	tokenize_letters(iter);
+	free(legend);
 }
