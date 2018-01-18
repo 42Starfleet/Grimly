@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 		{
 			tokenize_legend(g_legend);
 			initialize_map();
-			if (valid_map(0, 0))
+			if (valid_map(1, 1, g_tokens.lines))
 			{
 				printf("MAP IS VALID\n");
 //				solve_map(&g_map);

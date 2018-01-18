@@ -20,13 +20,13 @@ typedef struct				s_legend
 	char					path;
 	char					entry;
 	char					exit;
-	t_linked_list			*entry_info;
+	t_linked_list			*entries;
 	t_linked_list			*exits;
 }							t_legend;
 
 void						tokenize_legend(char *legend);
 int							valid_legend(char *legend);
-int							valid_map(int i, int j);
+int							valid_map(int i, int j, int lines);
 void						initialize_map(void);
 int							linked_list_size(t_linked_list *list);
 void						add_link(t_linked_list **list, void *data);

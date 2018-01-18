@@ -6,7 +6,7 @@
 /*   By: lilam <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 08:00:42 by lilam             #+#    #+#             */
-/*   Updated: 2018/01/18 10:54:02 by hiroshius        ###   ########.fr       */
+/*   Updated: 2018/01/18 13:39:15 by hiroshius        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	print_linked_list(t_linked_list *list)
 {
 	while (list)
 	{
-		ft_putstr((char *)list->data);
-		ft_putstr("\n");
+		printf("%d, %d\n", ((int *)list->data)[0], ((int *)list->data)[1]);
 		list = list->next;
 	}
 }
