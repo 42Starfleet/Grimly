@@ -16,6 +16,7 @@ static int	there_is_only_a_number_before_x(char *legend)
 	int		there_is_a_number;
 
 	there_is_a_number = 0;
+	i = 0;
 	while (legend[i] && legend[i] != 'x')
 	{
 		if (!('0' <= legend[i] && legend[i] <= '9'))
