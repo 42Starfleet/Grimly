@@ -4,9 +4,7 @@ static int		valid_tail(int n)
 {
 	int i;
 
-	if (g_map[n][0] != g_tokens.full)
-		return (0);
-	i = 1;
+	i = 0;
 	while (g_map[n][i])
 	{
 		if (!(g_map[n][i] == g_tokens.full || g_map[n][i] == g_tokens.entry ||
@@ -16,8 +14,6 @@ static int		valid_tail(int n)
 			return (0);
 		i++;
 	}
-	if (g_map[n][i - 1] != g_tokens.full)
-		return (0);
 	return (1);
 }
 

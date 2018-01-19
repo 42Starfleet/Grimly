@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 			if (valid_map(1, 1, g_tokens.lines))
 			{
 				printf("MAP IS VALID\n");
-//				solve_map(&g_map);
+				solve_map(&g_map);
 //				print_map(g_map);
 			}
 			else
