@@ -24,6 +24,17 @@ typedef struct				s_legend
 	t_linked_list			*exits;
 }							t_legend;
 
+typedef struct				s_node
+{
+	int						y;
+	int						x;
+	int						G;
+	int						H;
+	int						F;
+	int						open;
+	struct s_node			*parent;
+}							t_node;
+
 void						tokenize_legend(char *legend);
 int							valid_legend(char *legend);
 int							valid_map(int i, int j, int lines);
@@ -36,9 +47,14 @@ void						print_linked_list(t_linked_list *list);
 int							linked_list_size(t_linked_list *list);
 void						*value(t_linked_list *list, int n);
 int							*int_pair(int y, int x);
+void						solve_map(void);
+int							get_distance_cost(int y1, int x1, int y2, int x2);
+
 
 char *g_legend;
 char **g_map;
+
 int g_fd;
 t_legend g_tokens;
+t_node	***g_nodes;
 #endif
