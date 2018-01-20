@@ -20,8 +20,8 @@
 
 # Linker output
 *.ilk
-*.map
 *.exp
+grimly
 
 # Precompiled Headers
 *.gch
