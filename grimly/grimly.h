@@ -24,6 +24,18 @@ typedef struct				s_legend
 	t_linked_list			*exits;
 }							t_legend;
 
+typedef struct				s_queue_node
+{
+	void					*content;
+	struct s_queue_node		*next;
+}							t_queue_node;
+
+typedef struct				s_queue
+{
+	t_queue_node			*first;
+	t_queue_node			*last;
+}							t_queue;
+
 typedef struct				s_node
 {
 	int						y;
@@ -33,13 +45,14 @@ typedef struct				s_node
 	int						F;
 	int						open;
 	struct s_node			*parent;
+	struct s_node			*exit_node;
 }							t_node;
 
-void						tokenize_legend(char *legend);
+int							tokenize_legend(char *legend);
 int							valid_legend(char *legend);
-int							valid_map(int i, int j, int lines);
-void						initialize_map(void);
-int							linked_list_size(t_linked_list *list);
+int							valid_map(int i, int j);
+int							initialize_map(void);
+int							get_size(t_linked_list *list);
 void						add_link(t_linked_list **list, void *data);
 t_linked_list				*create_link(void *data);
 void						prepend_link(t_linked_list **list, void *data);
@@ -49,12 +62,43 @@ void						*value(t_linked_list *list, int n);
 int							*int_pair(int y, int x);
 void						solve_map(void);
 int							get_distance_cost(int y1, int x1, int y2, int x2);
+int							is_full_character(int y, int x);
+void						A_star();
+void						*dequeue(t_queue *queue);
+void						enqueue(t_queue *queue, void *content);
+t_queue						*init(void);
+int							is_empty(t_queue *queue);
+void						print_map(void);
+int							trace_path(t_node *node, int do_trace, int first_run);
+void						print_result(void);
+void						set_exit_node_trail(t_node *node, t_node *exit_node);
+void						copy_trail(t_node *node);
+void						slice_map_and_get_best_exit(void);
+int							node_is_in_list(t_linked_list *list, t_node *node);
 
 
 char *g_legend;
 char **g_map;
 
 int g_fd;
+int g_steps;
+int g_bounded_min_y;
+int g_bounded_min_x;
+int g_bounded_max_y;
+int g_bounded_max_x;
 t_legend g_tokens;
 t_node	***g_nodes;
+t_node	*smallest_F_node;
+t_linked_list *solutions;
+t_linked_list *equal_solutions;
+int solved;
+int z;
+
+int g_be_int_y;
+int g_be_int_x;
+int g_be_int_i;
+int g_be_int_j;
+t_linked_list *g_be_list;
+t_node *g_be_exit_node;
+t_node *g_best_exit;
 #endif

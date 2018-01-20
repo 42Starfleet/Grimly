@@ -1,9 +1,9 @@
 #include "grimly.h"
 
-void initialize_map(void)
+int			initialize_map(void)
 {
-	char *line;
-	int i;
+	char	*line;
+	int		i;
 
 	i = 0;
 	g_map = malloc(sizeof(char *) * g_tokens.lines + 1);
@@ -13,4 +13,5 @@ void initialize_map(void)
 		g_map[i] = line;
 		i++;
 	}
+	return (1);
 }

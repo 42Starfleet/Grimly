@@ -8,11 +8,12 @@ static void	tokenize_letters(char *letters)
 	g_tokens.exit = letters[3];
 }
 
-void		tokenize_legend(char *legend)
+int		tokenize_legend(char *legend)
 {
 	char	*iter;
 	int		i;
 
+	legend = ft_strdup(legend);
 	i = 0;
 	while (legend[i] != 'x')
 		i++;
@@ -32,5 +33,5 @@ void		tokenize_legend(char *legend)
 		iter++;
 	iter++;
 	tokenize_letters(iter);
-	free(legend);
+	return (1);
 }

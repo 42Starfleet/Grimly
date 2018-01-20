@@ -6,16 +6,16 @@
 /*   By: lilam <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 08:01:36 by lilam             #+#    #+#             */
-/*   Updated: 2018/01/18 10:54:03 by hiroshius        ###   ########.fr       */
+/*   Updated: 2018/01/19 15:33:31 by hiroshius        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "grimly.h"
 
-int				linked_list_size(t_linked_list *list)
+int						get_size(t_linked_list *list)
 {
 	t_linked_list		*iter;
-	int			i;
+	int					i;
 
 	iter = list;
 	i = 0;
