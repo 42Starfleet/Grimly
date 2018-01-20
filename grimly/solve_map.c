@@ -51,12 +51,12 @@ void insert_solution(t_node *node)
 	int iter_steps;
 	t_linked_list *iter;
 
-	iter = solutions;
+	iter = g_solutions;
 	g_steps = trace_path(node, 0, 1);
 	iter_steps = g_steps;
-	if (get_size(solutions) == 0)
+	if (get_size(g_solutions) == 0)
 	{
-		add_link(&solutions, create_link(node));
+		add_link(&g_solutions, create_link(node));
 		return ;
 	}
 	while (iter)
@@ -66,31 +66,21 @@ void insert_solution(t_node *node)
 			g_steps = iter_steps;
 		iter = iter->next;
 	}
-	add_link(&solutions, create_link(node));
+	add_link(&g_solutions, create_link(node));
 }
 
 void prune_for_equal_solutions(void)
 {
 	t_linked_list *iter;
 
-	iter = solutions;
+	iter = g_solutions;
 	while (iter)
 	{
 		if (trace_path(iter->data, 0, 1) == g_steps)
-			add_link(&equal_solutions, create_link(iter->data));
+			add_link(&g_equal_solutions, create_link(iter->data));
 		iter = iter->next;
 	}
 }
-
-
-void print_node(t_node *node)
-{
-	printf("Y: %d\n", node->y);
-	printf("X: %d\n", node->x);
-	printf("PARENT: %d\n", node->parent);
-	printf("EXIT NODE: %d\n", node->exit_node);
-}
-
 
 void prune_for_upmost_leftmost_solution(void)
 {
@@ -98,16 +88,16 @@ void prune_for_upmost_leftmost_solution(void)
 	t_linked_list *iter2;
 	t_node *node_iter;
 
-	if (get_size(equal_solutions) == 1)
+	if (get_size(g_equal_solutions) == 1)
 	{
-		trace_path(equal_solutions->data, 1, 1);
+		trace_path(g_equal_solutions->data, 1, 1);
 		return ;
 	}
-	iter = equal_solutions;
-	iter2 = equal_solutions;
+	iter = g_equal_solutions;
+	iter2 = g_equal_solutions;
 	while (iter)
 	{
-		copy_trail(iter->data);
+		copy_trail(((t_node *)iter->data)->parent);
 		node_iter = ((t_node *)iter->data)->parent;
 		while (node_iter->parent)
 		{
@@ -116,12 +106,11 @@ void prune_for_upmost_leftmost_solution(void)
 		}
 		iter = iter->next;
 	}
-	print_map();
-	iter = equal_solutions;
+	iter = g_equal_solutions;
 	t_node *node_iter2;
 	while (iter)
 	{
-		iter2 = equal_solutions;
+		iter2 = g_equal_solutions;
 		while (iter2)
 		{
 			node_iter = iter->data;
@@ -174,15 +163,18 @@ void solve_map(void)
 		g_bounded_max_y = entry->y;
 		g_bounded_max_x = entry->x;
 		exit = g_nodes[((int *)exit_info)[0]][((int *)exit_info)[1]];
-		solved = 0;
+		g_solved = 0;
 		A_star(entry->y, entry->x, 0, exit);
-		if (solved)
+		if (g_solved)
 		{
 			insert_solution(exit);
 			set_exit_node_trail(exit, exit);
 		}
 		g_tokens.exits = g_tokens.exits->next;
 	}
-	prune_for_equal_solutions();
-	prune_for_upmost_leftmost_solution();
+	if (g_solutions > 0)
+	{
+		prune_for_equal_solutions();
+		prune_for_upmost_leftmost_solution();
+	}
 }

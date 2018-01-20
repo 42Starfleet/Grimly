@@ -10,9 +10,7 @@ int					node_is_in_list(t_linked_list *list, t_node *node)
 	while (iter)
 	{
 		if (iter->data == node)
-		{
 			return (1);
-		}
 		iter = iter->next;
 	}
 	return (0);

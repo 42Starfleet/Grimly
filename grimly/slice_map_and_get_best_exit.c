@@ -6,6 +6,23 @@
 #define CHECK3 add_link(&g_be_list, create_link(g_be_exit_node));
 #define BREAK if (get_size(g_be_list) > 1) break ;
 
+static void	slice_map_and_get_best_exit4(void)
+{
+	int entry_y;
+	int entry_x;
+
+	entry_y = ((int *)(g_tokens.entries)->data)[0];
+	entry_x = ((int *)(g_tokens.entries)->data)[1];
+	if (entry_y - 1 >= 0 && g_nodes[entry_y - 1][entry_x])
+		g_best_exit = g_nodes[entry_y - 1][entry_x];
+	else if (entry_x - 1 >= 0 && g_nodes[entry_y][entry_x - 1])
+		g_best_exit = g_nodes[entry_y][entry_x - 1];
+	else if (entry_x + 1 < g_tokens.columns && g_nodes[entry_y][entry_x + 1])
+		g_best_exit = g_nodes[entry_y][entry_x + 1];
+	else if (entry_y + 1 < g_tokens.lines && g_nodes[entry_y + 1][entry_x])
+		g_best_exit = g_nodes[entry_y + 1][entry_x];
+}
+
 static void	slice_map_and_get_best_exit3(void)
 {
 	ASSIGN;
@@ -28,10 +45,12 @@ static void	slice_map_and_get_best_exit3(void)
 		}
 		if (get_size(g_be_list) == 1)
 			break ;
-		g_be_int_x--;
 		g_be_int_y--;
+		g_be_int_x--;
 	}
-	g_best_exit = g_be_list->data;
+	if (g_be_list && (g_best_exit = g_be_list->data))
+		return ;
+	slice_map_and_get_best_exit4();
 }
 
 static void	slice_map_and_get_best_exit2(void)
@@ -47,6 +66,7 @@ static void	slice_map_and_get_best_exit2(void)
 			{
 				g_be_exit_node = (g_nodes[g_be_int_i][g_be_int_j])->exit_node;
 				CHECK;
+				printf("%d, %d, %d\n", g_be_int_i, g_be_int_j, get_size(g_be_list));
 				BREAK;
 				g_be_int_j++;
 			}
@@ -54,12 +74,16 @@ static void	slice_map_and_get_best_exit2(void)
 				break ;
 			g_be_int_i++;
 		}
+		printf("\n");
 		if (get_size(g_be_list) == 1)
 			break ;
 		g_be_int_x--;
 	}
 	if (g_be_list && (g_best_exit = g_be_list->data))
+	{
+		printf("MISFIRE DETECTED.|||||||||||||||\n");
 		return ;
+	}
 	slice_map_and_get_best_exit3();
 }
 

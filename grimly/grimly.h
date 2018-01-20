@@ -59,6 +59,7 @@ void						set_exit_node_trail(t_node *node, t_node *exit_node);
 void						copy_trail(t_node *node);
 void						slice_map_and_get_best_exit(void);
 int							node_is_in_list(t_linked_list *list, t_node *node);
+void						reset_variables(void);
 
 
 char *g_legend;
@@ -72,11 +73,10 @@ int g_bounded_max_y;
 int g_bounded_max_x;
 t_legend g_tokens;
 t_node	***g_nodes;
-t_node	*smallest_F_node;
-t_linked_list *solutions;
-t_linked_list *equal_solutions;
-int solved;
-int z;
+t_node	*g_smallest_F_node;
+t_linked_list *g_solutions;
+t_linked_list *g_equal_solutions;
+int g_solved;
 
 int g_be_int_y;
 int g_be_int_x;

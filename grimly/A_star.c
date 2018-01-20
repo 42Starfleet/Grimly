@@ -66,7 +66,7 @@ t_node	*scan_map_and_get_smallest_F_node(void)
 	t_node *node;
 
 	first_run = 1;
-	smallest_F_node = 0;
+	g_smallest_F_node = 0;
 	i = g_bounded_min_y;
 	while (i <= g_bounded_max_y)
 	{
@@ -75,14 +75,14 @@ t_node	*scan_map_and_get_smallest_F_node(void)
 		{
 			node = g_nodes[i][j];
 			if (first_run && node->open && node->F >= 0 && !(first_run = 0))
-				smallest_F_node = node;
-			else if (node->open && node->F >= 0 && node->F < smallest_F_node->F)
-				smallest_F_node = node;
+				g_smallest_F_node = node;
+			else if (node->open && node->F >= 0 && node->F < g_smallest_F_node->F)
+				g_smallest_F_node = node;
 			j++;
 		}
 		i++;
 	}
-	return (smallest_F_node);
+	return (g_smallest_F_node);
 }
 
 void	A_star(int y, int x, int G, t_node *exit)
@@ -93,7 +93,7 @@ void	A_star(int y, int x, int G, t_node *exit)
 	node = g_nodes[y][x];
 	if (node->y == exit->y && node->x == exit->x)
 	{
-		solved = 1;
+		g_solved = 1;
 		return ;
 	}
 	node->open = 0;
