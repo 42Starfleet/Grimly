@@ -24,18 +24,6 @@ typedef struct				s_legend
 	t_linked_list			*exits;
 }							t_legend;
 
-typedef struct				s_queue_node
-{
-	void					*content;
-	struct s_queue_node		*next;
-}							t_queue_node;
-
-typedef struct				s_queue
-{
-	t_queue_node			*first;
-	t_queue_node			*last;
-}							t_queue;
-
 typedef struct				s_node
 {
 	int						y;
